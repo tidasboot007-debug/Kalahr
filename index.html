@@ -5,117 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planeta em Formação</title>
 
-<!-- Fonte Medieval + Elegante -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background: radial-gradient(circle at center, #1a001f, #000000);
-    color: white;
-    font-family: 'Cinzel', serif;
-    overflow-x: hidden;
+body{
+    font-family:'Poppins', sans-serif;
+    color:white;
+    overflow:hidden;
+    transition:0.4s;
+    background: linear-gradient(-45deg, #000000, #1a001f, #300033, #000000);
+    background-size:400% 400%;
+    animation: fundoAnimado 15s ease infinite;
 }
 
-/* PARTÍCULAS */
-body::before {
-    content: "";
-    position: fixed;
-    width: 200%;
-    height: 200%;
-    background: url("https://www.transparenttextures.com/patterns/stardust.png");
-    animation: estrelas 60s linear infinite;
-    opacity: 0.4;
+@keyframes fundoAnimado{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
-@keyframes estrelas {
-    from { transform: translate(0,0); }
-    to { transform: translate(-500px, -500px); }
+/* EFEITO PARTÍCULAS */
+body::after{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation: moverParticulas 60s linear infinite;
+    opacity:0.2;
+    z-index:-1;
 }
 
-/* PORTAL DE ABERTURA */
-#portal {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, #6a00ff, black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    animation: abrirPortal 3s forwards;
+@keyframes moverParticulas{
+    from{transform:translateY(0);}
+    to{transform:translateY(-500px);}
 }
 
-@keyframes abrirPortal {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(5); opacity: 0; visibility: hidden; }
+/* CONTAINER CENTRAL */
+.container{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
 }
 
-/* TÍTULO */
-h1 {
-    font-family: 'UnifrakturCook', cursive;
-    font-size: 3rem;
-    text-align: center;
-    margin-top: 100px;
-    color: gold;
-    text-shadow: 0 0 10px gold, 0 0 20px red;
+h1{
+    font-size:3rem;
+    font-weight:700;
+    letter-spacing:3px;
+    background:linear-gradient(45deg, gold, darkred);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+p{
+    margin-top:15px;
+    font-weight:300;
+    max-width:500px;
+}
+
+.botao{
+    margin-top:40px;
+    padding:15px 35px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg, #8b0000, gold);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.botao:hover{
+    transform:scale(1.1);
 }
 
 /* MENU */
-.menu-icon {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 30px;
-    cursor: pointer;
-    color: gold;
+.menu-icon{
+    position:fixed;
+    top:20px;
+    left:20px;
+    font-size:28px;
+    cursor:pointer;
+    z-index:1000;
 }
 
-.menu {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    width: 250px;
-    height: 100%;
-    background: #111;
-    padding: 30px;
-    transition: 0.5s;
+.menu{
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:250px;
+    height:100%;
+    background:#111;
+    padding:30px;
+    transition:0.4s;
 }
 
-.menu a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    margin: 15px 0;
-    font-size: 18px;
+.menu a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin:15px 0;
 }
 
-.menu a:hover {
-    color: gold;
-    text-shadow: 0 0 10px gold;
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
 }
 
-/* BOTÕES */
-.botao {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 40px auto;
-    background: darkred;
-    color: gold;
-    border: 2px solid gold;
-    cursor: pointer;
-    transition: 0.3s;
+.toggle-mode{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    background:black;
+    color:white;
 }
 
-.botao:hover {
-    transform: scale(1.1);
-    background: black;
-    box-shadow: 0 0 20px red;
+/* MODO CLARO */
+.light{
+    color:#111;
+    background:linear-gradient(-45deg, #ffffff, #e0e0e0, #f5f5f5, #ffffff);
+}
+
+.light .menu{
+    background:#eee;
+}
+
+.light .menu a{
+    color:#111;
+}
+
+.light .toggle-mode{
+    background:white;
+    color:black;
 }
 
 </style>
@@ -123,9 +162,7 @@ h1 {
 
 <body>
 
-<div id="portal"></div>
-
-<div class="menu-icon" onclick="abrirMenu()">☰</div>
+<div class="menu-icon" onclick="abrirMenu()">≡</div>
 
 <div class="menu" id="menu">
     <a href="#">Raças</a>
@@ -138,27 +175,38 @@ h1 {
     <a href="#">Loja Comum</a>
 </div>
 
-<h1>Planeta em Formação</h1>
+<div class="overlay" id="overlay" onclick="fecharMenu()"></div>
 
-<div style="text-align:center;">
-    <div class="botao" onclick="somClique()">Explorar</div>
+<div class="container">
+    <h1>PLANETA EM FORMAÇÃO</h1>
+    <p>Um universo mágico, sombrio e cósmico está sendo criado.</p>
+    <button class="botao" onclick="somClique()">Explorar</button>
 </div>
+
+<button class="toggle-mode" onclick="alternarModo()">Modo Claro</button>
 
 <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
 
 <script>
-function abrirMenu() {
-    const menu = document.getElementById("menu");
-    if(menu.style.left === "0px"){
-        menu.style.left = "-300px";
-    } else {
-        menu.style.left = "0px";
-    }
+
+function abrirMenu(){
+    document.getElementById("menu").style.left="0";
+    document.getElementById("overlay").style.display="block";
 }
 
-function somClique() {
+function fecharMenu(){
+    document.getElementById("menu").style.left="-280px";
+    document.getElementById("overlay").style.display="none";
+}
+
+function alternarModo(){
+    document.body.classList.toggle("light");
+}
+
+function somClique(){
     document.getElementById("clickSound").play();
 }
+
 </script>
 
 </body>
