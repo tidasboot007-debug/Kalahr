@@ -15,23 +15,22 @@ box-sizing:border-box;
 }
 
 body{
-background: radial-gradient(circle at center, #0f0f0f 0%, #050505 60%, #000000 100%);
+background:
+radial-gradient(circle at 50% 20%, #111 0%, #050505 40%, #000 100%);
 color:white;
 overflow:hidden;
-font-family:Arial, sans-serif;
 height:100vh;
+font-family:Arial, sans-serif;
 }
 
-/* Efeito vidro */
-body::after{
-content:"";
+/* Reflexo de vidro leve */
+.glass-overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:linear-gradient(120deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-backdrop-filter: blur(3px);
+background:linear-gradient(120deg, rgba(255,255,255,0.04), transparent 40%);
 pointer-events:none;
 }
 
@@ -47,7 +46,7 @@ border:1px solid rgba(150,0,0,0.6);
 pointer-events:none;
 }
 
-/* Souls Of Khaal */
+/* Souls */
 .top-right{
 position:fixed;
 top:20px;
@@ -64,7 +63,6 @@ font-family:"Times New Roman", serif;
 font-size:4rem;
 text-align:center;
 margin-top:25vh;
-transition:0.5s;
 }
 
 /* MENU */
@@ -83,7 +81,7 @@ top:0;
 left:-25%;
 width:25%;
 height:100%;
-background:rgba(10,10,10,0.95);
+background:#0a0a0a;
 padding:40px;
 transition:0.6s;
 border-right:1px solid darkred;
@@ -94,32 +92,27 @@ display:block;
 color:white;
 text-decoration:none;
 margin:20px 0;
-opacity:0.8;
 }
 
-/* SANGUE REALISTA */
+/* SANGUE SVG */
+.blood-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
 .blood{
 position:absolute;
-top:-150px;
-width:12px;
-height:150px;
-background:linear-gradient(to bottom, #7a0000, #3a0000);
-border-radius:50px;
-filter: blur(0.5px);
 animation:drip linear forwards;
 }
 
 @keyframes drip{
-0%{
-transform:translateY(0);
-opacity:0.9;
-}
-90%{
-opacity:0.9;
-}
-100%{
-transform:translateY(120vh);
-opacity:0;
+to{
+transform:translateY(110vh);
 }
 }
 
@@ -127,6 +120,8 @@ opacity:0;
 </head>
 
 <body>
+
+<div class="glass-overlay"></div>
 
 <div class="top-right">Souls Of Khaal</div>
 
@@ -142,6 +137,8 @@ opacity:0;
 
 <h1 id="titulo">Planeta Existente</h1>
 
+<div class="blood-container" id="bloodContainer"></div>
+
 <script>
 
 /* MENU */
@@ -150,7 +147,7 @@ const menu=document.getElementById("menu");
 menu.style.left = menu.style.left === "0%" ? "-25%" : "0%";
 }
 
-/* TROCA DE IDIOMAS */
+/* IDIOMAS */
 const titulo=document.getElementById("titulo");
 
 const idiomas=[
@@ -170,22 +167,38 @@ index=(index+1)%idiomas.length;
 titulo.textContent=idiomas[index];
 },1000);
 
-/* CRIAR SANGUE ESCORRENDO */
+/* SANGUE ORGÂNICO */
 function criarSangue(){
-const sangue=document.createElement("div");
+
+const container=document.getElementById("bloodContainer");
+
+const sangue=document.createElementNS("http://www.w3.org/2000/svg","svg");
+sangue.setAttribute("width","40");
+sangue.setAttribute("height","150");
 sangue.classList.add("blood");
 
 sangue.style.left=Math.random()*100+"vw";
+sangue.style.top="-150px";
 sangue.style.animationDuration=(Math.random()*6+6)+"s";
 
-document.body.appendChild(sangue);
+const path=document.createElementNS("http://www.w3.org/2000/svg","path");
+
+path.setAttribute("d",
+"M20 0 C 5 40, 35 60, 20 120 C 10 140, 30 140, 20 150 Z"
+);
+
+path.setAttribute("fill","#6b0000");
+
+sangue.appendChild(path);
+container.appendChild(sangue);
 
 setTimeout(()=>{
 sangue.remove();
 },12000);
+
 }
 
-setInterval(criarSangue,800);
+setInterval(criarSangue,1500);
 
 </script>
 
