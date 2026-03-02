@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planeta em Formação</title>
+<title>Planeta Kalahr</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -15,79 +15,47 @@ box-sizing:border-box;
 }
 
 body{
-font-family:'Inter', sans-serif;
-background:#0a0a0f;
+background:black;
 color:white;
 overflow:hidden;
+font-family:Arial, sans-serif;
 }
 
-/* FUNDO GRADIENTE PROFISSIONAL */
-.background{
+/* BORDAS DO SITE */
+body::before{
+content:"";
 position:fixed;
-width:100%;
-height:100%;
-background: radial-gradient(circle at 30% 30%, #300033, transparent 60%),
-radial-gradient(circle at 70% 70%, #8b0000, transparent 60%),
-#0a0a0f;
-z-index:-2;
+top:10px;
+left:10px;
+right:10px;
+bottom:10px;
+border:2px solid darkred;
+pointer-events:none;
 }
 
-/* PARTÍCULAS */
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
-
-/* HERO */
-.container{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+/* TÍTULO PRINCIPAL */
+#titulo{
+font-family:"Times New Roman", serif;
+font-size:4rem;
 text-align:center;
-padding:20px;
+margin-top:25vh;
 }
 
-h1{
-font-size:3.5rem;
-font-weight:800;
-background:linear-gradient(90deg,gold,#ff0000);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-margin-bottom:20px;
+/* TEXTO DIREITA */
+.top-right{
+position:fixed;
+top:20px;
+right:30px;
+font-family:'Raleway', sans-serif;
+font-size:18px;
+letter-spacing:2px;
 }
 
-p{
-max-width:600px;
-opacity:0.7;
-margin-bottom:40px;
-}
-
-/* BOTÃO PREMIUM */
-.botao{
-padding:15px 40px;
-border-radius:50px;
-border:1px solid rgba(255,255,255,0.2);
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-color:white;
-cursor:pointer;
-transition:0.3s;
-}
-
-.botao:hover{
-transform:translateY(-3px);
-box-shadow:0 0 20px rgba(255,0,0,0.5);
-}
-
-/* MENU MODERNO */
+/* MENU */
 .menu-icon{
 position:fixed;
-top:25px;
-left:25px;
+top:20px;
+left:30px;
 font-size:28px;
 cursor:pointer;
 z-index:1000;
@@ -95,62 +63,37 @@ z-index:1000;
 
 .menu{
 position:fixed;
-top:20px;
-left:-270px;
-width:240px;
-padding:25px;
-border-radius:20px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(15px);
-transition:0.4s;
+top:0;
+left:-25%;
+width:25%;
+height:100%;
+background:#0a0a0a;
+padding:40px;
+transition:0.5s;
+border-right:1px solid darkred;
 }
 
 .menu a{
 display:block;
 color:white;
 text-decoration:none;
-margin:15px 0;
-opacity:0.8;
-transition:0.3s;
+margin:20px 0;
 }
 
-.menu a:hover{
-opacity:1;
-transform:translateX(5px);
-}
-
-/* MODO CLARO */
-.light{
-background:#f5f5f5;
-color:#111;
-}
-
-.light .menu{
-background:rgba(255,255,255,0.8);
-}
-
-.light .botao{
-background:rgba(0,0,0,0.05);
-color:black;
-}
-
-/* BOTÃO MODO */
-.toggle{
+/* SANGUE */
+.blood-drop{
 position:fixed;
-bottom:20px;
-right:20px;
-padding:10px 20px;
-border-radius:30px;
-border:none;
-cursor:pointer;
-background:rgba(255,255,255,0.1);
-color:white;
-backdrop-filter:blur(10px);
+top:-20px;
+width:3px;
+height:20px;
+background:darkred;
+animation:fall linear infinite;
 }
 
-.light .toggle{
-background:rgba(0,0,0,0.1);
-color:black;
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
 }
 
 </style>
@@ -158,10 +101,9 @@ color:black;
 
 <body>
 
-<div class="background"></div>
-<canvas id="particles"></canvas>
+<div class="top-right">Souls Of Khaal</div>
 
-<div class="menu-icon" onclick="abrirMenu()">☰</div>
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
 
 <div class="menu" id="menu">
 <a href="#">Raças</a>
@@ -174,62 +116,43 @@ color:black;
 <a href="#">Loja Comum</a>
 </div>
 
-<div class="container">
-<h1>PLANETA EM FORMAÇÃO</h1>
-<p>Um universo mágico, sombrio e cósmico está sendo criado com profundidade, mistério e poder.</p>
-<button class="botao">Explorar Universo</button>
-</div>
-
-<button class="toggle" onclick="alternarModo()">Modo Claro</button>
+<h1 id="titulo">Planeta Kalahr</h1>
 
 <script>
 
 /* MENU */
-function abrirMenu(){
+function toggleMenu(){
 const menu=document.getElementById("menu");
-menu.style.left = menu.style.left==="20px" ? "-270px" : "20px";
+menu.style.left = menu.style.left === "0%" ? "-25%" : "0%";
 }
 
-/* MODO */
-function alternarModo(){
-document.body.classList.toggle("light");
+/* TROCA DE IDIOMA */
+const titulo=document.getElementById("titulo");
+const idiomas=[
+"Planeta Kalahr",
+"Πλανήτης Kalahr",
+"פלנטת Kalahr"
+];
+
+let index=0;
+
+setInterval(()=>{
+index=(index+1)%idiomas.length;
+titulo.textContent=idiomas[index];
+},1000);
+
+/* GOTAS DE SANGUE */
+function criarGota(){
+const drop=document.createElement("div");
+drop.classList.add("blood-drop");
+drop.style.left=Math.random()*100+"vw";
+drop.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(drop);
+
+setTimeout(()=>{drop.remove();},5000);
 }
 
-/* PARTÍCULAS REAIS */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let particles=[];
-
-for(let i=0;i<100;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2,
-speed:Math.random()*0.5+0.2
-});
-}
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-ctx.fillStyle="rgba(255,255,255,0.5)";
-ctx.fill();
-p.y-=p.speed;
-if(p.y<0){
-p.y=canvas.height;
-p.x=Math.random()*canvas.width;
-}
-});
-requestAnimationFrame(animate);
-}
-
-animate();
+setInterval(criarGota,200);
 
 </script>
 
