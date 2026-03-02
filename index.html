@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -16,12 +15,13 @@ box-sizing:border-box;
 }
 
 body{
-font-family: 'Cinzel', serif;
+font-family:'Cinzel', serif;
 color:white;
 overflow:hidden;
+background:black;
 }
 
-/* VÍDEO FUNDO */
+/* VIDEO FUNDO */
 #bg-video{
 position:fixed;
 top:0;
@@ -32,18 +32,18 @@ object-fit:cover;
 z-index:-3;
 }
 
-/* CAMADA ESCURA PARA CINEMATOGRAFIA */
+/* CAMADA ESCURA PARA DAR CLIMA */
 .overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.85));
+background:rgba(0,0,0,0.75);
 z-index:-2;
 }
 
-/* REFLEXO DE VIDRO SUTIL */
+/* REFLEXO SUAVE */
 .glass{
 position:fixed;
 top:0;
@@ -64,10 +64,10 @@ transform:translate(-50%,-50%);
 font-size:4rem;
 text-align:center;
 letter-spacing:4px;
-text-shadow:0 0 20px rgba(150,0,0,0.7);
+text-shadow:0 0 20px rgba(150,0,0,0.8);
 }
 
-/* Souls */
+/* TEXTO SUPERIOR */
 .top-right{
 position:fixed;
 top:20px;
