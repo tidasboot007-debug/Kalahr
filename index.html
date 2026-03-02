@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planeta em Formação</title>
+
+<!-- Fonte Medieval + Elegante -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, #1a001f, #000000);
+    color: white;
+    font-family: 'Cinzel', serif;
+    overflow-x: hidden;
+}
+
+/* PARTÍCULAS */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: url("https://www.transparenttextures.com/patterns/stardust.png");
+    animation: estrelas 60s linear infinite;
+    opacity: 0.4;
+}
+
+@keyframes estrelas {
+    from { transform: translate(0,0); }
+    to { transform: translate(-500px, -500px); }
+}
+
+/* PORTAL DE ABERTURA */
+#portal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #6a00ff, black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: abrirPortal 3s forwards;
+}
+
+@keyframes abrirPortal {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(5); opacity: 0; visibility: hidden; }
+}
+
+/* TÍTULO */
+h1 {
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 100px;
+    color: gold;
+    text-shadow: 0 0 10px gold, 0 0 20px red;
+}
+
+/* MENU */
+.menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: gold;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 250px;
+    height: 100%;
+    background: #111;
+    padding: 30px;
+    transition: 0.5s;
+}
+
+.menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.menu a:hover {
+    color: gold;
+    text-shadow: 0 0 10px gold;
+}
+
+/* BOTÕES */
+.botao {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 40px auto;
+    background: darkred;
+    color: gold;
+    border: 2px solid gold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao:hover {
+    transform: scale(1.1);
+    background: black;
+    box-shadow: 0 0 20px red;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="portal"></div>
+
+<div class="menu-icon" onclick="abrirMenu()">☰</div>
+
+<div class="menu" id="menu">
+    <a href="#">Raças</a>
+    <a href="#">Reinos</a>
+    <a href="#">Biomas</a>
+    <a href="#">Cristais</a>
+    <a href="#">Culinária</a>
+    <a href="#">Relíquias</a>
+    <a href="#">Loja VIP</a>
+    <a href="#">Loja Comum</a>
+</div>
+
+<h1>Planeta em Formação</h1>
+
+<div style="text-align:center;">
+    <div class="botao" onclick="somClique()">Explorar</div>
+</div>
+
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
+<script>
+function abrirMenu() {
+    const menu = document.getElementById("menu");
+    if(menu.style.left === "0px"){
+        menu.style.left = "-300px";
+    } else {
+        menu.style.left = "0px";
+    }
+}
+
+function somClique() {
+    document.getElementById("clickSound").play();
+}
+</script>
+
+</body>
+</html>
