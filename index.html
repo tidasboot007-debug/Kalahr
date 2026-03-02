@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planeta Existente</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -15,35 +16,55 @@ box-sizing:border-box;
 }
 
 body{
-background:
-radial-gradient(circle at 50% 20%, #111 0%, #050505 40%, #000 100%);
+font-family: 'Cinzel', serif;
 color:white;
 overflow:hidden;
-height:100vh;
-font-family:Arial, sans-serif;
 }
 
-/* Reflexo de vidro leve */
-.glass-overlay{
+/* VÍDEO FUNDO */
+#bg-video{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:linear-gradient(120deg, rgba(255,255,255,0.04), transparent 40%);
-pointer-events:none;
+object-fit:cover;
+z-index:-3;
 }
 
-/* Borda */
-body::before{
-content:"";
+/* CAMADA ESCURA PARA CINEMATOGRAFIA */
+.overlay{
 position:fixed;
-top:10px;
-left:10px;
-right:10px;
-bottom:10px;
-border:1px solid rgba(150,0,0,0.6);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.85));
+z-index:-2;
+}
+
+/* REFLEXO DE VIDRO SUTIL */
+.glass{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(120deg, rgba(255,255,255,0.05), transparent 40%);
 pointer-events:none;
+z-index:-1;
+}
+
+/* TÍTULO */
+#titulo{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:4rem;
+text-align:center;
+letter-spacing:4px;
+text-shadow:0 0 20px rgba(150,0,0,0.7);
 }
 
 /* Souls */
@@ -51,18 +72,9 @@ pointer-events:none;
 position:fixed;
 top:20px;
 right:30px;
-font-family:'Raleway', sans-serif;
 letter-spacing:3px;
-font-size:18px;
+font-size:14px;
 opacity:0.8;
-}
-
-/* Título */
-#titulo{
-font-family:"Times New Roman", serif;
-font-size:4rem;
-text-align:center;
-margin-top:25vh;
 }
 
 /* MENU */
@@ -78,13 +90,14 @@ z-index:1000;
 .menu{
 position:fixed;
 top:0;
-left:-25%;
-width:25%;
+left:-260px;
+width:260px;
 height:100%;
-background:#0a0a0a;
-padding:40px;
-transition:0.6s;
+background:rgba(0,0,0,0.95);
+padding:60px 30px;
+transition:0.5s;
 border-right:1px solid darkred;
+z-index:999;
 }
 
 .menu a{
@@ -92,28 +105,12 @@ display:block;
 color:white;
 text-decoration:none;
 margin:20px 0;
+font-size:18px;
+transition:0.3s;
 }
 
-/* SANGUE SVG */
-.blood-container{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-overflow:hidden;
-}
-
-.blood{
-position:absolute;
-animation:drip linear forwards;
-}
-
-@keyframes drip{
-to{
-transform:translateY(110vh);
-}
+.menu a:hover{
+color:darkred;
 }
 
 </style>
@@ -121,7 +118,13 @@ transform:translateY(110vh);
 
 <body>
 
-<div class="glass-overlay"></div>
+<!-- VIDEO FUNDO -->
+<video autoplay muted loop playsinline id="bg-video">
+<source src="sangue.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+<div class="glass"></div>
 
 <div class="top-right">Souls Of Khaal</div>
 
@@ -137,14 +140,11 @@ transform:translateY(110vh);
 
 <h1 id="titulo">Planeta Existente</h1>
 
-<div class="blood-container" id="bloodContainer"></div>
-
 <script>
 
-/* MENU */
 function toggleMenu(){
 const menu=document.getElementById("menu");
-menu.style.left = menu.style.left === "0%" ? "-25%" : "0%";
+menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
 }
 
 /* IDIOMAS */
@@ -165,40 +165,7 @@ let index=0;
 setInterval(()=>{
 index=(index+1)%idiomas.length;
 titulo.textContent=idiomas[index];
-},1000);
-
-/* SANGUE ORGÂNICO */
-function criarSangue(){
-
-const container=document.getElementById("bloodContainer");
-
-const sangue=document.createElementNS("http://www.w3.org/2000/svg","svg");
-sangue.setAttribute("width","40");
-sangue.setAttribute("height","150");
-sangue.classList.add("blood");
-
-sangue.style.left=Math.random()*100+"vw";
-sangue.style.top="-150px";
-sangue.style.animationDuration=(Math.random()*6+6)+"s";
-
-const path=document.createElementNS("http://www.w3.org/2000/svg","path");
-
-path.setAttribute("d",
-"M20 0 C 5 40, 35 60, 20 120 C 10 140, 30 140, 20 150 Z"
-);
-
-path.setAttribute("fill","#6b0000");
-
-sangue.appendChild(path);
-container.appendChild(sangue);
-
-setTimeout(()=>{
-sangue.remove();
-},12000);
-
-}
-
-setInterval(criarSangue,1500);
+},2000);
 
 </script>
 
