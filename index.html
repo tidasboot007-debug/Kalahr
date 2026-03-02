@@ -22,38 +22,37 @@ overflow:hidden;
 background:black;
 }
 
-/* VIDEO FUNDO */
+/* VIDEO FUNDO ULTRA DEFINIÇÃO */
 #bg-video{
 position:fixed;
 top:0;
 left:0;
-width:100%;
-height:100%;
+width:100vw;
+height:100vh;
 object-fit:cover;
+object-position:center;
 z-index:-3;
+
+filter:none !important;
+transform:none !important;
+
+image-rendering:auto;
 }
 
-/* ESCURECER VIDEO */
+/* ESCURECER VIDEO (menos pesado para não borrar) */
 .overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.78);
+background:rgba(0,0,0,0.65);
 z-index:-2;
 }
 
-/* REFLEXO VIDRO */
+/* REMOVIDO EFEITO DE VIDRO QUE PODIA DAR SENSAÇÃO DE DESFOQUE */
 .glass{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(120deg, rgba(255,255,255,0.06), transparent 40%);
-pointer-events:none;
-z-index:-1;
+display:none;
 }
 
 /* TITULO */
@@ -66,7 +65,6 @@ font-size:4.5rem;
 letter-spacing:6px;
 text-align:center;
 font-family:"Times New Roman", serif;
-
 color:white;
 
 text-shadow:
@@ -77,7 +75,7 @@ text-shadow:
 -2px -2px 0 #000;
 }
 
-/* TEXTO DIREITA */
+/* RESTO IGUAL */
 .top-right{
 position:fixed;
 top:20px;
@@ -87,7 +85,6 @@ font-size:14px;
 opacity:0.85;
 }
 
-/* MENU ICON */
 .menu-icon{
 position:fixed;
 top:20px;
@@ -97,7 +94,6 @@ cursor:pointer;
 z-index:1000;
 }
 
-/* MENU LATERAL */
 .menu{
 position:fixed;
 top:0;
@@ -130,13 +126,11 @@ transform:translateX(6px);
 
 <body>
 
-<!-- VIDEO FUNDO -->
 <video autoplay muted loop playsinline id="bg-video">
 <source src="oval.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
-<div class="glass"></div>
 
 <div class="top-right">Souls Of Khaal</div>
 
@@ -153,14 +147,11 @@ transform:translateX(6px);
 <h1 id="titulo">Planeta Inexistente</h1>
 
 <script>
-
-/* MENU */
 function toggleMenu(){
 const menu=document.getElementById("menu");
 menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
 }
 
-/* IDIOMAS */
 const titulo=document.getElementById("titulo");
 
 const idiomas=[
@@ -179,7 +170,6 @@ setInterval(()=>{
 index=(index+1)%idiomas.length;
 titulo.textContent=idiomas[index];
 },1000);
-
 </script>
 
 </body>
