@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planeta Existente</title>
+<title>Planeta Inexistente</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -32,85 +32,105 @@ object-fit:cover;
 z-index:-3;
 }
 
-/* CAMADA ESCURA PARA DAR CLIMA */
+/* CAMADA ESCURA */
 .overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.75);
+background:rgba(0,0,0,0.7);
 z-index:-2;
 }
 
-/* REFLEXO SUAVE */
+/* REFLEXO VIDRO */
 .glass{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:linear-gradient(120deg, rgba(255,255,255,0.05), transparent 40%);
+background:
+linear-gradient(120deg, rgba(255,255,255,0.06), transparent 40%),
+linear-gradient(300deg, rgba(255,0,0,0.05), transparent 60%);
 pointer-events:none;
 z-index:-1;
 }
 
-/* TÍTULO */
+/* TITULO PRINCIPAL */
 #titulo{
 position:absolute;
-top:50%;
+top:18%;
 left:50%;
-transform:translate(-50%,-50%);
-font-size:4rem;
+transform:translateX(-50%);
+font-family:'Playfair Display', serif;
+font-size:4.2rem;
+letter-spacing:6px;
 text-align:center;
-letter-spacing:4px;
-text-shadow:0 0 20px rgba(150,0,0,0.8);
+color:#f5e6d3;
+
+text-shadow:
+0 0 6px rgba(255,255,255,0.3),
+0 0 15px rgba(255,0,0,0.4),
+0 0 30px rgba(120,0,0,0.7);
 }
 
-/* TEXTO SUPERIOR */
+/* TEXTO SUPERIOR DIREITO */
 .top-right{
 position:fixed;
-top:20px;
-right:30px;
-letter-spacing:3px;
-font-size:14px;
+top:25px;
+right:35px;
+font-family:Raleway, sans-serif;
+letter-spacing:4px;
+font-size:15px;
 opacity:0.8;
 }
 
-/* MENU */
+/* MENU ICON */
 .menu-icon{
 position:fixed;
-top:20px;
-left:30px;
-font-size:28px;
+top:25px;
+left:35px;
+font-size:30px;
 cursor:pointer;
 z-index:1000;
+transition:0.3s;
 }
 
+.menu-icon:hover{
+transform:scale(1.2);
+color:red;
+}
+
+/* MENU LATERAL */
 .menu{
 position:fixed;
 top:0;
-left:-260px;
-width:260px;
+left:-25%;
+width:25%;
 height:100%;
-background:rgba(0,0,0,0.95);
-padding:60px 30px;
-transition:0.5s;
+background:rgba(0,0,0,0.97);
+padding:90px 40px;
+transition:0.6s;
 border-right:1px solid darkred;
 z-index:999;
+backdrop-filter:blur(6px);
 }
 
 .menu a{
 display:block;
 color:white;
 text-decoration:none;
-margin:20px 0;
-font-size:18px;
+margin:25px 0;
+font-size:20px;
+letter-spacing:2px;
 transition:0.3s;
 }
 
 .menu a:hover{
-color:darkred;
+color:red;
+transform:translateX(10px);
+text-shadow:0 0 10px red;
 }
 
 </style>
@@ -118,7 +138,7 @@ color:darkred;
 
 <body>
 
-<!-- VIDEO FUNDO -->
+<!-- VIDEO -->
 <video autoplay muted loop playsinline id="bg-video">
 <source src="sangue.mp4.mp4" type="video/mp4">
 </video>
@@ -136,28 +156,32 @@ color:darkred;
 <a href="#">Biomas</a>
 <a href="#">Cristais</a>
 <a href="#">Relíquias</a>
+<a href="#">Culinária</a>
+<a href="#">Loja VIP</a>
+<a href="#">Loja Comum</a>
 </div>
 
-<h1 id="titulo">Planeta Existente</h1>
+<h1 id="titulo">Planeta Inexistente</h1>
 
 <script>
 
+/* MENU */
 function toggleMenu(){
 const menu=document.getElementById("menu");
-menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
+menu.style.left = menu.style.left === "0%" ? "-25%" : "0%";
 }
 
 /* IDIOMAS */
 const titulo=document.getElementById("titulo");
 
 const idiomas=[
-"Planeta Existente",
-"Υπάρχων Πλανήτης",
-"כוכב קיים",
-"존재하는 행성",
-"كوكب موجود",
-"ดาวเคราะห์ที่มีอยู่",
-"Существующая Планета"
+"Planeta Inexistente",
+"Ανύπαρκτος Πλανήτης",
+"כוכב לא קיים",
+"존재하지 않는 행성",
+"كوكب غير موجود",
+"ดาวเคราะห์ที่ไม่มีอยู่",
+"Несуществующая Планета"
 ];
 
 let index=0;
@@ -165,7 +189,7 @@ let index=0;
 setInterval(()=>{
 index=(index+1)%idiomas.length;
 titulo.textContent=idiomas[index];
-},2000);
+},1000); // velocidade dobrada
 
 </script>
 
