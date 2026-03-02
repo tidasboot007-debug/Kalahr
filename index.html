@@ -1,45 +1,157 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planeta Inexistente</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    
-    /* IMAGEM DE FUNDO */
-    background-image: url("fundo.png");
-    background-size: cover;        /* cobre toda a tela */
-    background-position: center;   /* centraliza */
-    background-repeat: no-repeat;  /* não repete */
-    background-attachment: fixed;  /* efeito imersivo */
-    
-    overflow: hidden;
-  }
 
-  h1 {
-    position: absolute;
-    top: 15%; /* mais acima da tela */
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-size: 70px;
-    font-family: serif;
-    letter-spacing: 5px;
-    text-shadow:
-      0 0 10px red,
-      0 0 20px darkred,
-      0 0 40px crimson;
-  }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Cinzel', serif;
+color:white;
+overflow:hidden;
+
+/* IMAGEM FUNDO ULTRA DEFINIÇÃO */
+background-image:url("fundo.png.jpeg");
+background-size:cover;          /* cobre toda a tela */
+background-position:center;     /* centraliza */
+background-repeat:no-repeat;
+background-attachment:fixed;    /* efeito imersivo */
+background-color:black;         /* fallback */
+}
+
+/* ESCURECER FUNDO (mantém nitidez) */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.65);
+z-index:-1;
+}
+
+/* TITULO */
+#titulo{
+position:absolute;
+top:22%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:4.5rem;
+letter-spacing:6px;
+text-align:center;
+font-family:"Times New Roman", serif;
+color:white;
+
+text-shadow:
+0 0 10px #8b0000,
+0 0 20px #8b0000,
+0 0 40px #4b0000,
+2px 2px 0 #000,
+-2px -2px 0 #000;
+}
+
+/* RESTO IGUAL */
+.top-right{
+position:fixed;
+top:20px;
+right:30px;
+letter-spacing:4px;
+font-size:14px;
+opacity:0.85;
+}
+
+.menu-icon{
+position:fixed;
+top:20px;
+left:30px;
+font-size:28px;
+cursor:pointer;
+z-index:1000;
+}
+
+.menu{
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:rgba(0,0,0,0.96);
+padding:70px 30px;
+transition:0.55s;
+border-right:1px solid darkred;
+z-index:999;
+}
+
+.menu a{
+display:block;
+color:white;
+text-decoration:none;
+margin:20px 0;
+font-size:18px;
+transition:0.3s;
+}
+
+.menu a:hover{
+color:#8b0000;
+transform:translateX(6px);
+}
+
 </style>
-
 </head>
+
 <body>
 
-<h1>Planeta Inexistente</h1>
+<div class="overlay"></div>
+
+<div class="top-right">Souls Of Khaal</div>
+
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+<div class="menu" id="menu">
+<a href="#">Raças</a>
+<a href="#">Reinos</a>
+<a href="#">Biomas</a>
+<a href="#">Cristais</a>
+<a href="#">Relíquias</a>
+</div>
+
+<h1 id="titulo">Planeta Inexistente</h1>
+
+<script>
+function toggleMenu(){
+const menu=document.getElementById("menu");
+menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
+}
+
+const titulo=document.getElementById("titulo");
+
+const idiomas=[
+"Planeta Inexistente",
+"Ανύπαρκτος Πλανήτης",
+"כוכב לא קיים",
+"존재하지 않는 행성",
+"كوكب غير موجود",
+"ดาวเคราะห์ที่ไม่มีอยู่",
+"Несуществующая Планета"
+];
+
+let index=0;
+
+setInterval(()=>{
+index=(index+1)%idiomas.length;
+titulo.textContent=idiomas[index];
+},1000);
+</script>
 
 </body>
 </html>
