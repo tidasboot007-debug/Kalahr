@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Planeta Kalahr</title>
+<title>Planeta Existente</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 
@@ -15,13 +15,27 @@ box-sizing:border-box;
 }
 
 body{
-background:black;
+background: radial-gradient(circle at center, #0f0f0f 0%, #050505 60%, #000000 100%);
 color:white;
 overflow:hidden;
 font-family:Arial, sans-serif;
+height:100vh;
 }
 
-/* BORDAS DO SITE */
+/* Efeito vidro */
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(120deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+backdrop-filter: blur(3px);
+pointer-events:none;
+}
+
+/* Borda */
 body::before{
 content:"";
 position:fixed;
@@ -29,26 +43,28 @@ top:10px;
 left:10px;
 right:10px;
 bottom:10px;
-border:2px solid darkred;
+border:1px solid rgba(150,0,0,0.6);
 pointer-events:none;
 }
 
-/* TÍTULO PRINCIPAL */
-#titulo{
-font-family:"Times New Roman", serif;
-font-size:4rem;
-text-align:center;
-margin-top:25vh;
-}
-
-/* TEXTO DIREITA */
+/* Souls Of Khaal */
 .top-right{
 position:fixed;
 top:20px;
 right:30px;
 font-family:'Raleway', sans-serif;
+letter-spacing:3px;
 font-size:18px;
-letter-spacing:2px;
+opacity:0.8;
+}
+
+/* Título */
+#titulo{
+font-family:"Times New Roman", serif;
+font-size:4rem;
+text-align:center;
+margin-top:25vh;
+transition:0.5s;
 }
 
 /* MENU */
@@ -67,9 +83,9 @@ top:0;
 left:-25%;
 width:25%;
 height:100%;
-background:#0a0a0a;
+background:rgba(10,10,10,0.95);
 padding:40px;
-transition:0.5s;
+transition:0.6s;
 border-right:1px solid darkred;
 }
 
@@ -78,21 +94,32 @@ display:block;
 color:white;
 text-decoration:none;
 margin:20px 0;
+opacity:0.8;
 }
 
-/* SANGUE */
-.blood-drop{
-position:fixed;
-top:-20px;
-width:3px;
-height:20px;
-background:darkred;
-animation:fall linear infinite;
+/* SANGUE REALISTA */
+.blood{
+position:absolute;
+top:-150px;
+width:12px;
+height:150px;
+background:linear-gradient(to bottom, #7a0000, #3a0000);
+border-radius:50px;
+filter: blur(0.5px);
+animation:drip linear forwards;
 }
 
-@keyframes fall{
-to{
-transform:translateY(110vh);
+@keyframes drip{
+0%{
+transform:translateY(0);
+opacity:0.9;
+}
+90%{
+opacity:0.9;
+}
+100%{
+transform:translateY(120vh);
+opacity:0;
 }
 }
 
@@ -110,13 +137,10 @@ transform:translateY(110vh);
 <a href="#">Reinos</a>
 <a href="#">Biomas</a>
 <a href="#">Cristais</a>
-<a href="#">Culinária</a>
 <a href="#">Relíquias</a>
-<a href="#">Loja VIP</a>
-<a href="#">Loja Comum</a>
 </div>
 
-<h1 id="titulo">Planeta Kalahr</h1>
+<h1 id="titulo">Planeta Existente</h1>
 
 <script>
 
@@ -126,12 +150,17 @@ const menu=document.getElementById("menu");
 menu.style.left = menu.style.left === "0%" ? "-25%" : "0%";
 }
 
-/* TROCA DE IDIOMA */
+/* TROCA DE IDIOMAS */
 const titulo=document.getElementById("titulo");
+
 const idiomas=[
-"Planeta Kalahr",
-"Πλανήτης Kalahr",
-"פלנטת Kalahr"
+"Planeta Existente",
+"Υπάρχων Πλανήτης",
+"כוכב קיים",
+"존재하는 행성",
+"كوكب موجود",
+"ดาวเคราะห์ที่มีอยู่",
+"Существующая Планета"
 ];
 
 let index=0;
@@ -141,18 +170,22 @@ index=(index+1)%idiomas.length;
 titulo.textContent=idiomas[index];
 },1000);
 
-/* GOTAS DE SANGUE */
-function criarGota(){
-const drop=document.createElement("div");
-drop.classList.add("blood-drop");
-drop.style.left=Math.random()*100+"vw";
-drop.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(drop);
+/* CRIAR SANGUE ESCORRENDO */
+function criarSangue(){
+const sangue=document.createElement("div");
+sangue.classList.add("blood");
 
-setTimeout(()=>{drop.remove();},5000);
+sangue.style.left=Math.random()*100+"vw";
+sangue.style.animationDuration=(Math.random()*6+6)+"s";
+
+document.body.appendChild(sangue);
+
+setTimeout(()=>{
+sangue.remove();
+},12000);
 }
 
-setInterval(criarGota,200);
+setInterval(criarSangue,800);
 
 </script>
 
