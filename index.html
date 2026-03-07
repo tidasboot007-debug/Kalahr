@@ -11,6 +11,54 @@
 
 <h1>KALAHR</h1>
 
+</body> <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalahr</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- BOTÃO DO MENU -->
+<div class="menu-btn" onclick="abrirMenu()">
+≡
+</div>
+
+<!-- MENU -->
+<div id="menu" class="menu">
+
+<div class="fechar" onclick="fecharMenu()">X</div>
+
+<h1>menu</h1>
+
+<ul>
+<li>Raças</li>
+<li>Relíquias</li>
+<li>Reinos</li>
+<li>Loja comum</li>
+<li>Loja VIP</li>
+<li>Culinária</li>
+</ul>
+
+</div>
+
+<script>
+
+function abrirMenu(){
+document.getElementById("menu").style.left = "0";
+}
+
+function fecharMenu(){
+document.getElementById("menu").style.left = "-100%";
+}
+
+</script>
+
 </body>
+</html>
 
 </html>
