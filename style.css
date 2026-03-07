@@ -9,3 +9,61 @@ body{
 
   height:100vh;
 }
+
+body{
+margin:0;
+padding:0;
+background-image:url("assets/images/fundo.jpg");
+background-size:cover;
+background-position:center;
+height:100vh;
+font-family:Arial;
+color:white;
+}
+
+/* BOTÃO ≡ */
+.menu-btn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:40px;
+cursor:pointer;
+z-index:10;
+}
+
+/* PAINEL DO MENU */
+.menu{
+position:fixed;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+
+background-image:url("assets/menu.png");
+background-size:cover;
+background-position:center;
+
+transition:0.5s;
+padding:60px;
+}
+
+/* BOTÃO X */
+.fechar{
+position:absolute;
+top:20px;
+right:30px;
+font-size:40px;
+color:red;
+cursor:pointer;
+}
+
+/* LISTA */
+.menu ul{
+list-style:disc;
+font-size:30px;
+}
+
+.menu li{
+margin:20px 0;
+cursor:pointer;
+}
